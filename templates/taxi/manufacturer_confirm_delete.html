@@ -6,6 +6,7 @@
   <form method="post">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Confirm</button>
-    <a href="{% url 'taxi:manufacturer-list' %}" class="btn btn-secondary">Cancel</a>
+    {% url 'taxi:manufacturer-list' as fallback_url %}
+    <a href="{{ request.META.HTTP_REFERER|default:fallback_url }}" class="btn btn-secondary">Cancel</a>
   </form>
 {% endblock %}
